@@ -17,9 +17,20 @@ defmodule Discuss.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {Discuss, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+    [ mod: {Discuss, []},
+      applications: [
+        :phoenix,
+        :phoenix_pubsub,
+        :phoenix_html,
+        :cowboy,
+        :logger,
+        :gettext,
+        :ueberauth,
+        :ueberauth_github,
+        :phoenix_ecto,
+        :postgrex
+      ]
+    ]
   end
 
   # Specifies which paths to compile per environment.
@@ -37,6 +48,8 @@ defmodule Discuss.Mixfile do
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
+     {:ueberauth, "~> 0.4"},
+     {:ueberauth_github, "~> 0.4"},
      {:cowboy, "~> 1.0"}]
   end
 
