@@ -9,5 +9,6 @@ defmodule Discuss.AuthController do
 
     IO.puts "+++++++++++++++++++"
     IO.inspect params
+    # Apex.ap auth, numbers: false
   end
 end

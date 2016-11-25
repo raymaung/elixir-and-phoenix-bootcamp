@@ -50,6 +50,7 @@ defmodule Discuss.Mixfile do
      {:gettext, "~> 0.11"},
      {:ueberauth, "~> 0.4"},
      {:ueberauth_github, "~> 0.4"},
+     {:apex, "~>0.6.0"},
      {:cowboy, "~> 1.0"}]
   end
 
