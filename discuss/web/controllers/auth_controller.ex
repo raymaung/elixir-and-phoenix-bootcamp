@@ -6,9 +6,6 @@ defmodule Discuss.AuthController do
   alias Discuss.User
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, params) do
-  # def callback(conn, params) do
-    IO.puts "+++++++++++++++++++"
-
     user_params = %{
       token: auth.credentials.token,
       email: auth.info.email,
@@ -18,7 +15,21 @@ defmodule Discuss.AuthController do
     # Apex.ap auth, numbers: false
 
     changeset = User.changeset(%User{}, user_params)
-    insert_or_update_user(changeset)
+    signin(conn, changeset)
+  end
+
+  defp signin(conn, changeset) do
+    case insert_or_update_user(changeset) do
+      {:ok, user} ->
+        conn
+        |> put_flash(:info, "Welcome back")
+        |> put_session(:user_id, user.id)
+        |> redirect(to: topic_path(conn, :index))
+      {:error, _changeset} ->
+        conn
+        |> put_flash(:error, "Error signing in")
+        |> redirect(to: topic_path(conn, :index))
+    end
   end
 
   defp insert_or_update_user(changeset) do
